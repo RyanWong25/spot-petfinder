@@ -14,7 +14,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+import jinja2
+import os
+import json
 import webapp2
+import random
+import logging
+from google.appengine.api import users
+from google.appengine.ext import ndb
+
+jinja_environment = jinja2.Environment(
+    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
