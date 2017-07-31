@@ -52,9 +52,10 @@ class LostMapPage(webapp2.RequestHandler):
 class LostLocationHandler(webapp2.RequestHandler):
     #saves lost location entered by user
     def post(self):
-        # logging.info('got a request')
-        # name = self.request.get('name')
-        # lat = self.request.get()
+        lost_location = self.request.get('lostLocation')
+        lost_location = json.loads(lost_location)
+        lat = str(lost_location['lat'])
+        lng = str(lost_location['lng'])
 
 
     #returns all lost locations entered into database
