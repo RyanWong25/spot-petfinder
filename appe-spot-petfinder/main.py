@@ -24,6 +24,15 @@ import logging
 from google.appengine.api import users
 from google.appengine.ext import ndb
 
+class LostPet(ndb.Model):
+    lat = ndb.StringProperty()
+    lng = ndb.StringProperty()
+    
+
+class SpottedPet(ndb.Model):
+    lat = ndb.StringProperty()
+    lng = ndb.StringProperty()
+
 jinja_environment = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
 
