@@ -24,6 +24,8 @@ import logging
 from google.appengine.api import users
 from google.appengine.ext import ndb
 
+
+
 class LostPet(ndb.Model):
     lat = ndb.StringProperty()
     lng = ndb.StringProperty()
