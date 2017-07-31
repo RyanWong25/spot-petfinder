@@ -51,31 +51,31 @@ class LostMapPage(webapp2.RequestHandler):
         template = jinja_environment.get_template('templates/map.html')
         self.response.write(template.render())
 
-class LostLocationHandler(webapp2.RequestHandler):
-    #saves lost location entered by user
-    def post(self):
-        lost_location = self.request.get('lostLocation')
-        lost_location = json.loads(lost_location)
-        lat = str(lost_location['lat'])
-        lng = str(lost_location['lng'])
-
-
-    #returns all lost locations entered into database
-    def get(self):
-
-class SpotLocationHandler(webapp2.RequestHandler):
-    #saves spotted locations entered by users
-    def post(self):
-
-    #returns all spotted locations entered into database
-    def get(self):
-
+# class LostLocationHandler(webapp2.RequestHandler):
+#     #saves lost location entered by user
+#     def post(self):
+#         lost_location = self.request.get('lostLocation')
+#         lost_location = json.loads(lost_location)
+#         lat = str(lost_location['lat'])
+#         lng = str(lost_location['lng'])
+#
+#
+#     #returns all lost locations entered into database
+#     def get(self):
+#
+# class SpotLocationHandler(webapp2.RequestHandler):
+#     #saves spotted locations entered by users
+#     def post(self):
+#
+#     #returns all spotted locations entered into database
+#     def get(self):
+#
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/lost', LostMapPage),
-    ('/postlost', LostLocationHandler),
-    ('/getlost', LostLocationHandler),
-    ('/postspot', SpotLocationHandler),
-    ('/getspot', SpotLocationHandler),
+    # ('/postlost', LostLocationHandler),
+    # ('/getlost', LostLocationHandler),
+    # ('/postspot', SpotLocationHandler),
+    # ('/getspot', SpotLocationHandler),
 ], debug=True)
