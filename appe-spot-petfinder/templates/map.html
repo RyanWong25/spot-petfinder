@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+
+
+
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+
+
+  <body>
+    <div id="map"></div>
+<style>
+body {
+    margin: 0px;
+    padding: 34px;
+    text-align: center;
+    position: absolute;
+    top: 36px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+  }
+  #map {
+    height: calc(100% - 200px);
+    width: 100%;
+  }
+</style>
+    <script>
+    function initMap() {
+var map = new google.maps.Map(document.getElementById('map'), {
+  zoom: 8,
+  center: {lat: 47.6769, lng: -122.2060 }
+});
+
+map.addListener('click', function(e) {
+  placeMarkerAndPanTo(e.latLng, map);
+  s = (e.latLng);
+  $.post('/postposition', {'position': JSON.stringify(s)});
+});
+}
+
+function placeMarkerAndPanTo(latLng, map) {
+var marker = new google.maps.Marker({
+  position: latLng,
+  map: map
+});
+map.panTo(latLng);
+}
+
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXT58ti2WBlhiJvhE_ckqkaJCyh7eg6bQ&callback=initMap"
+    async defer></script>
+
+
+
+  </body>
+</html>
+
+
+
+<button onclick="get_position()"> Get position</buitton>
+  <script>
+  var map, marker;
+  function initMap() {
+    map = new google.maps.Map(document.getElementById(''))
+  }
