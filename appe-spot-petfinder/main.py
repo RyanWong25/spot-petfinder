@@ -24,23 +24,58 @@ import logging
 from google.appengine.api import users
 from google.appengine.ext import ndb
 
+
+
 class LostPet(ndb.Model):
     lat = ndb.StringProperty()
     lng = ndb.StringProperty()
-
+    name = ndb.StringProperty()
+    pet_name = ndb.StringProperty()
+    description = ndb.StringProperty()
 
 class SpottedPet(ndb.Model):
     lat = ndb.StringProperty()
     lng = ndb.StringProperty()
+
 
 jinja_environment = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
+        template = jinja_environment.get_template('templates/index.html')
+        self.response.write(template.render())
+
+class LostMapPage(webapp2.RequestHandler):
+    def get(self):
         template = jinja_environment.get_template('templates/map.html')
         self.response.write(template.render())
 
+class LostLocationHandler(webapp2.RequestHandler):
+    #saves lost location entered by user
+    def post(self):
+        # logging.info('got a request')
+        # name = self.request.get('name')
+        # lat = self.request.get()
+
+
+    #returns all lost locations entered into database
+    def get(self):
+
+
+class SpotLocationHandler(webapp2.RequestHandler):
+    #saves spotted locations entered by users
+    def post(self):
+
+    #returns all spotted locations entered into database
+    def get(self):
+
+
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
+    ('/', MainHandler),
+    ('/lost', LostMapPage),
+    ('/postlost', LostLocationHandler),
+    ('/getlost', LostLocationHandler),
+    ('/postspot', SpotLocationHandler),
+    ('/getspot', SpotLocationHandler),
 ], debug=True)
