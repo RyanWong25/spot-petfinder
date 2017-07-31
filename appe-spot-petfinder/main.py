@@ -61,7 +61,6 @@ class LostLocationHandler(webapp2.RequestHandler):
     #returns all lost locations entered into database
     def get(self):
 
-
 class SpotLocationHandler(webapp2.RequestHandler):
     #saves spotted locations entered by users
     def post(self):
