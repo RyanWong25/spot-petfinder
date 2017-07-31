@@ -27,7 +27,7 @@ from google.appengine.ext import ndb
 class LostPet(ndb.Model):
     lat = ndb.StringProperty()
     lng = ndb.StringProperty()
-    
+
 
 class SpottedPet(ndb.Model):
     lat = ndb.StringProperty()
