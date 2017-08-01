@@ -7,9 +7,6 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <style>
-
-
-
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
@@ -63,32 +60,24 @@ var map = new google.maps.Map(document.getElementById('map'), {
   zoom: 8,
   center: {lat: 47.6769, lng: -122.2060 }
 });
-
 map.addListener('click', function(e) {
   placeMarkerAndPanTo(e.latLng, map);
   s = (e.latLng);
   $.post('/postposition', {'position': JSON.stringify(s)});
 });
 }
-
 function placeMarkerAndPanTo(latLng, map) {
-
 var image = '/dogpic/dog.png';
-
 var marker = new google.maps.Marker({
   position: latLng,
   icon: image,
   draggable: true,
   map: map
 });
-
 var infowindow = new google.maps.InfoWindow({
     content : "<input id='myText" + index + "' type='text'>",
     id : index
 });
-
-
-
 
 map.panTo(latLng);
 google.maps.event.addListener( marker, "click", function() {
@@ -97,8 +86,6 @@ google.maps.event.addListener( marker, "click", function() {
 google.maps.event.addListener( infowindow, "closeclick", function(e) {
     infowindow.setContent("<input id='myText" + infowindow.id + "' type='text' value='" + document.getElementById("myText" + infowindow.id).value + "'>");
 });
-
-
 index++;
 }
 google.maps.event.addDomListener(window, 'load', initMap);
@@ -108,6 +95,7 @@ var mapOptions = {
   center: myLatlng
 }
 var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+<<<<<<< HEAD
 
 
       }
@@ -133,6 +121,8 @@ var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
 
 
+=======
+>>>>>>> aef76b9b64fa790ec7af88c4a93fe6df085aac05
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXT58ti2WBlhiJvhE_ckqkaJCyh7eg6bQ&callback=initMap"
     async defer></script>
@@ -144,13 +134,8 @@ var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
 
 
-<!-- <button onclick="get_position()"> Mark Lost Dog</buitton>
-  <script>
-  var map, marker;
-  function initMap() {
-    map = new google.maps.Map(document.getElementById(''))
-<<<<<<< HEAD
+
   } -->
-=======
+
   }
->>>>>>> 13be8619b5d878fb25349b17583e5149a0a21810
+>>>>>>> 6168df925725cbf7e91d8b830e62db3a10849aeb
