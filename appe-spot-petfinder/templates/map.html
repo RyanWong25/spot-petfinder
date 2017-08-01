@@ -95,34 +95,6 @@ var mapOptions = {
   center: myLatlng
 }
 var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-<<<<<<< HEAD
-
-
-      }
-      // Returns the position of the marker
-      function getMarkerPosition() {
-        return marker.position;
-      }
-      // Makes a POST request to save the location on the backend
-      function sendPosition() {
-        $.post('postlocation', {
-          location: JSON.stringify(getMarkerPosition()),
-        })
-        .then(function() {
-          // If we get here then the data was sent to the backend successfully,
-          // let's show a success alert, and tell the user that they can navigate
-          // to the other page to see all the pins on the map
-          address = location.protocol + '//' + location.host + '/mapr-all';
-          alert('Nice! You can see all the places at ' + address);
-        });
-      }
-
-
-
-
-
-=======
->>>>>>> aef76b9b64fa790ec7af88c4a93fe6df085aac05
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXT58ti2WBlhiJvhE_ckqkaJCyh7eg6bQ&callback=initMap"
     async defer></script>
@@ -135,6 +107,6 @@ var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
 
 
-  } -->
+  }
 
   }
