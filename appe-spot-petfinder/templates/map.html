@@ -24,6 +24,17 @@
     </style>
   </head>
 
+  <h2>Spot-It</h2>
+
+  <a href="/mapr-all">See all marks</a>
+    <br>
+    <div id="map"></div>
+    <br>
+    <button class="btn btn-primary" onclick="sendPosition()">Mark Your Dog</button>
+    <div id="successModal" class="modal fade bs-example-modal-sm">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+
 
   <body>
     <div id="map"></div>
@@ -43,6 +54,8 @@ body {
     width: 100%;
   }
 </style>
+<button onclick="placeMarkerAndPanTo()"> Mark Lost Dog</buitton>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
     <script>
     index = 0
 function initMap() {
@@ -60,11 +73,12 @@ map.addListener('click', function(e) {
 
 function placeMarkerAndPanTo(latLng, map) {
 
-var image = 'dog.png';
+var image = '/dogpic/dog.png';
 
 var marker = new google.maps.Marker({
   position: latLng,
   icon: image,
+  draggable: true,
   map: map
 });
 
@@ -84,10 +98,15 @@ google.maps.event.addListener( infowindow, "closeclick", function(e) {
     infowindow.setContent("<input id='myText" + infowindow.id + "' type='text' value='" + document.getElementById("myText" + infowindow.id).value + "'>");
 });
 
-index++;
-}
 
-google.maps.event.addDomListener(window, 'load', initialize);
+index++;
+};
+google.maps.event.addDomListener(window, 'load', initMap);
+
+
+
+
+
 
 
 
@@ -102,9 +121,9 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 
 
-<button onclick="get_position()"> Mark Lost Dog</buitton>
+<!-- <button onclick="get_position()"> Mark Lost Dog</buitton>
   <script>
   var map, marker;
   function initMap() {
     map = new google.maps.Map(document.getElementById(''))
-  }
+  } -->
