@@ -78,6 +78,7 @@ var infowindow = new google.maps.InfoWindow({
     content : "<input id='myText" + index + "' type='text'>",
     id : index
 });
+
 map.panTo(latLng);
 google.maps.event.addListener( marker, "click", function() {
    infowindow.open( map, marker );
@@ -109,3 +110,4 @@ var map = new google.maps.Map(document.getElementById("map"), mapOptions);
   } -->
 
   }
+>>>>>>> 6168df925725cbf7e91d8b830e62db3a10849aeb

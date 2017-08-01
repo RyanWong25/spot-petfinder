@@ -5,12 +5,12 @@ api_version: 1
 threadsafe: yes
 
 handlers:
-- url: /favicon\.ico
-  static_files: favicon.ico
-  upload: favicon\.ico
+- url: /dogpic
+  static_dir: images
 
 - url: .*
   script: main.app
+
 
 libraries:
 - name: jinja2
