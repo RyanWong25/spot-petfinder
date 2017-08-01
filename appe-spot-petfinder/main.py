@@ -29,9 +29,7 @@ from google.appengine.ext import ndb
 class LostPet(ndb.Model):
     lat = ndb.StringProperty()
     lng = ndb.StringProperty()
-    name = ndb.StringProperty()
-    pet_name = ndb.StringProperty()
-    description = ndb.StringProperty()
+
 
 class SpottedPet(ndb.Model):
     lat = ndb.StringProperty()
@@ -46,10 +44,10 @@ class MainHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template('templates/map.html')
         self.response.write(template.render())
 
-# class LostMapPage(webapp2.RequestHandler):
-#     def get(self):
-#         template = jinja_environment.get_template('templates/index.html')
-#         self.response.write(template.render())
+class LostMapPage(webapp2.RequestHandler):
+    def get(self):
+        template = jinja_environment.get_template('templates/index.html')
+        self.response.write(template.render())
 
 # class LostLocationHandler(webapp2.RequestHandler):
 #     #saves lost location entered by user

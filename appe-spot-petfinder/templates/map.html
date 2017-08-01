@@ -100,11 +100,14 @@ google.maps.event.addListener( infowindow, "closeclick", function(e) {
 
 
 index++;
-};
+}
 google.maps.event.addDomListener(window, 'load', initMap);
-
-
-
+var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
+var mapOptions = {
+  zoom: 4,
+  center: myLatlng
+}
+var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
 
 
@@ -126,4 +129,8 @@ google.maps.event.addDomListener(window, 'load', initMap);
   var map, marker;
   function initMap() {
     map = new google.maps.Map(document.getElementById(''))
+<<<<<<< HEAD
   } -->
+=======
+  }
+>>>>>>> 13be8619b5d878fb25349b17583e5149a0a21810
