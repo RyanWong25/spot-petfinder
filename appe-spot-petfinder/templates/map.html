@@ -21,6 +21,17 @@
     </style>
   </head>
 
+  <h2>Spot-It</h2>
+
+  <a href="/mapr-all">See all marks</a>
+    <br>
+    <div id="map"></div>
+    <br>
+    <button class="btn btn-primary" onclick="sendPosition()">Mark Your Dog</button>
+    <div id="successModal" class="modal fade bs-example-modal-sm">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+
 
   <body>
     <div id="map"></div>
@@ -40,6 +51,8 @@ body {
     width: 100%;
   }
 </style>
+<button onclick="placeMarkerAndPanTo()"> Mark Lost Dog</buitton>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
     <script>
     index = 0
 function initMap() {
@@ -54,45 +67,17 @@ map.addListener('click', function(e) {
 });
 }
 function placeMarkerAndPanTo(latLng, map) {
-var image = 'dog.png';
+var image = '/dogpic/dog.png';
 var marker = new google.maps.Marker({
   position: latLng,
-<<<<<<< HEAD
-  map: map,
-  draggable: true
-});
-// The following example creates a marker in Stockholm, Sweden using a DROP
-// animation. Clicking on the marker will toggle the animation between a BOUNCE
-// animation and no animation.
-function initMap() {
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 13,
-    center: {lat: 59.325, lng: 18.070}
-  });
-  marker = new google.maps.Marker({
-    map: map,
-    draggable: true,
-    animation: google.maps.Animation.DROP,
-    position: {lat: 47.6769, lng: -122.2060}
-  });
-  marker.addListener('click', toggleBounce);
-}
-function toggleBounce() {
-  if (marker.getAnimation() !== null) {
-    marker.setAnimation(null);
-  } else {
-    marker.setAnimation(google.maps.Animation.BOUNCE);
-  }
-}
-=======
   icon: image,
+  draggable: true,
   map: map
 });
 var infowindow = new google.maps.InfoWindow({
     content : "<input id='myText" + index + "' type='text'>",
     id : index
 });
->>>>>>> f8d8c4dad6f6a371fad7f4f8cc51773e663a3b6c
 map.panTo(latLng);
 google.maps.event.addListener( marker, "click", function() {
    infowindow.open( map, marker );
@@ -102,13 +87,13 @@ google.maps.event.addListener( infowindow, "closeclick", function(e) {
 });
 index++;
 }
+google.maps.event.addDomListener(window, 'load', initMap);
 var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
 var mapOptions = {
   zoom: 4,
   center: myLatlng
 }
 var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-google.maps.event.addDomListener(window, 'load', initialize);
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXT58ti2WBlhiJvhE_ckqkaJCyh7eg6bQ&callback=initMap"
     async defer></script>
@@ -117,15 +102,16 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
   </body>
 </html>
-<<<<<<< HEAD
-=======
 
 
 
-<button onclick="get_position()"> Mark Lost Dog</buitton>
+<!-- <button onclick="get_position()"> Mark Lost Dog</buitton>
   <script>
   var map, marker;
   function initMap() {
     map = new google.maps.Map(document.getElementById(''))
+<<<<<<< HEAD
+  } -->
+=======
   }
->>>>>>> f8d8c4dad6f6a371fad7f4f8cc51773e663a3b6c
+>>>>>>> 13be8619b5d878fb25349b17583e5149a0a21810
