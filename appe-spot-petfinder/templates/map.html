@@ -78,6 +78,7 @@ var infowindow = new google.maps.InfoWindow({
     content : "<input id='myText" + index + "' type='text'>",
     id : index
 });
+
 map.panTo(latLng);
 google.maps.event.addListener( marker, "click", function() {
    infowindow.open( map, marker );
@@ -94,11 +95,6 @@ var mapOptions = {
   center: myLatlng
 }
 var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
-
-
-
-
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXT58ti2WBlhiJvhE_ckqkaJCyh7eg6bQ&callback=initMap"
     async defer></script>
@@ -110,9 +106,7 @@ var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
 
 
-<!-- <button onclick="get_position()"> Mark Lost Dog</buitton>
-  <script>
-  var map, marker;
-  function initMap() {
-    map = new google.maps.Map(document.getElementById(''))
+
+  } -->
+
   }
