@@ -49,6 +49,18 @@ class LostMapPage(webapp2.RequestHandler):
         template = jinja_environment.get_template('templates/index.html')
         self.response.write(template.render())
 
+class LostForm(webapp2.RequestHandler):
+    def get(self):
+        template = jinja_environment.get_template('templates/form.html')
+        self.response.write(template.render())
+
+        def post(self):
+            name = self.request.get('name')
+            phone_number = self.request.get('phonenumber')
+            pet_name = self.request.get('petname')
+            description = self.request.get('description')
+
+
 # class LostLocationHandler(webapp2.RequestHandler):
 #     #saves lost location entered by user
 #     def post(self):
@@ -73,6 +85,7 @@ class LostMapPage(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
+    ('/info', LostForm),
     # ('/lost', LostMapPage)
     # ('/postlost', LostLocationHandler),
     # ('/getlost', LostLocationHandler),
