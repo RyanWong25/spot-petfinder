@@ -5,6 +5,7 @@
     <title>Simple Map</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <style>
 
 
@@ -43,7 +44,8 @@ body {
   }
 </style>
     <script>
-    function initMap() {
+    index = 0
+function initMap() {
 var map = new google.maps.Map(document.getElementById('map'), {
   zoom: 8,
   center: {lat: 47.6769, lng: -122.2060 }
@@ -57,8 +59,12 @@ map.addListener('click', function(e) {
 }
 
 function placeMarkerAndPanTo(latLng, map) {
+
+var image = 'dog.png';
+
 var marker = new google.maps.Marker({
   position: latLng,
+<<<<<<< HEAD
   map: map,
   draggable: true
 });
@@ -90,7 +96,29 @@ function toggleBounce() {
     marker.setAnimation(google.maps.Animation.BOUNCE);
   }
 }
+=======
+  icon: image,
+  map: map
+});
+
+var infowindow = new google.maps.InfoWindow({
+    content : "<input id='myText" + index + "' type='text'>",
+    id : index
+});
+
+
+
+
+>>>>>>> f8d8c4dad6f6a371fad7f4f8cc51773e663a3b6c
 map.panTo(latLng);
+google.maps.event.addListener( marker, "click", function() {
+   infowindow.open( map, marker );
+});
+google.maps.event.addListener( infowindow, "closeclick", function(e) {
+    infowindow.setContent("<input id='myText" + infowindow.id + "' type='text' value='" + document.getElementById("myText" + infowindow.id).value + "'>");
+});
+
+index++;
 }
 var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
 var mapOptions = {
@@ -98,6 +126,9 @@ var mapOptions = {
   center: myLatlng
 }
 var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+
+google.maps.event.addDomListener(window, 'load', initialize);
 
 
 
@@ -109,3 +140,15 @@ var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
   </body>
 </html>
+<<<<<<< HEAD
+=======
+
+
+
+<button onclick="get_position()"> Mark Lost Dog</buitton>
+  <script>
+  var map, marker;
+  function initMap() {
+    map = new google.maps.Map(document.getElementById(''))
+  }
+>>>>>>> f8d8c4dad6f6a371fad7f4f8cc51773e663a3b6c
