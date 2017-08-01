@@ -41,8 +41,39 @@ jinja_environment = jinja2.Environment(
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        template = jinja_environment.get_template('templates/map.html')
+        template = jinja_environment.get_template('templates/form3.html')
         self.response.write(template.render())
+
+        my_vars = {
+
+        "ownername" : self.request.get("ownername"),
+        "ownernum" : self.request.get("ownername"),
+        "lostpet" : self.request.get("lostpet"),
+        "breed" : self.request.get("breed"),
+        "height" : self.request.get("height"),
+        "weight" : self.request.get("weight"),
+        "misc" : self.request.get("misc")
+
+        }
+        template = jinja_environment.get_template('templates/index.html')
+        output = self.response.write(template.render())
+
+    def post(self):
+        pass
+
+        # my_vars = {
+        #
+        # "ownername" : self.request.get("ownername"),
+        # "ownernum" : self.request.get("ownername"),
+        # "lostpet" : self.request.get("lostpet"),
+        # "breed" : self.request.get("breed"),
+        # "height" : self.request.get("height"),
+        # "weight" : self.request.get("weight"),
+        # "misc" : self.request.get("misc")
+        #
+        # }
+        # template = jinja_environment.get_template('templates/map.html')
+        # self.response.write(template.render(my_vars))
 
 class LostMapPage(webapp2.RequestHandler):
     def get(self):
@@ -73,6 +104,7 @@ class LostMapPage(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
+
     # ('/lost', LostMapPage)
     # ('/postlost', LostLocationHandler),
     # ('/getlost', LostLocationHandler),

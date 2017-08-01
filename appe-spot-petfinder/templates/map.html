@@ -21,7 +21,7 @@
     </style>
   </head>
 
-  <h2>Spot-It</h2>
+  <h2>Spot It</h2>
 
   <a href="/mapr-all">See all marks</a>
     <br>
@@ -74,8 +74,9 @@ var marker = new google.maps.Marker({
   draggable: true,
   map: map
 });
+
 var infowindow = new google.maps.InfoWindow({
-    content : "<input id='myText" + index + "' type='text'>",
+    content : "<input id='myText" + index + "' type='text'>" {{ output }},
     id : index
 });
 
