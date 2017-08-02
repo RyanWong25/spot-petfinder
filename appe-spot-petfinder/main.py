@@ -25,15 +25,16 @@ from google.appengine.api import users
 from google.appengine.ext import ndb
 
 
-
 class LostPet(ndb.Model):
     lat = ndb.StringProperty()
     lng = ndb.StringProperty()
+    name = ndb.StringProperty()
+    phone = ndb.StringProperty()
+    misc = ndb.StringProperty()
 
-
-class SpottedPet(ndb.Model):
-    lat = ndb.StringProperty()
-    lng = ndb.StringProperty()
+# class SpotPet(ndb.Model):
+#     lat = ndb.StringProperty()
+#     lng = ndb.StringProperty()
 
 
 jinja_environment = jinja2.Environment(
@@ -41,17 +42,21 @@ jinja_environment = jinja2.Environment(
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        template = jinja_environment.get_template('templates/form3.html')
+
+        # template = jinja_environment.get_template('templates/form3.html')
+        # self.response.write(template.render())
+
+        template = jinja_environment.get_template('templates/map.html')
         self.response.write(template.render())
 
         my_vars = {
 
         "ownername" : self.request.get("ownername"),
         "ownernum" : self.request.get("ownername"),
-        "lostpet" : self.request.get("lostpet"),
-        "breed" : self.request.get("breed"),
-        "height" : self.request.get("height"),
-        "weight" : self.request.get("weight"),
+        # "lostpet" : self.request.get("lostpet"),
+        # "breed" : self.request.get("breed"),
+        # "height" : self.request.get("height"),
+        # "weight" : self.request.get("weight"),
         "misc" : self.request.get("misc")
 
         }
@@ -77,37 +82,59 @@ class MainHandler(webapp2.RequestHandler):
 
 class LostMapPage(webapp2.RequestHandler):
     def get(self):
-        template = jinja_environment.get_template('templates/index.html')
+        template = jinja_environment.get_template('templates/map.html')
         self.response.write(template.render())
 
-# class LostLocationHandler(webapp2.RequestHandler):
-#     #saves lost location entered by user
-#     def post(self):
-#         lost_location = self.request.get('lostLocation')
-#         lost_location = json.loads(lost_location)
-#         lat = str(lost_location['lat'])
-#         lng = str(lost_location['lng'])
-#
-#
-#     #returns all lost locations entered into database
-#     def get(self):
-#         pass
+
+class LostPetHandler(webapp2.RequestHandler):
+    def post(self):
+        logging.info('got a request')
+
+        """POST request handler, saves the new location into the database.
+        A user can only have one row in the database, so multiple entries
+        will overwrite each other."""
+
+        # Make sure the user is signed in, because we need their identity
+        # to save it along with the coordinates
+            # Get the request data
+        lat = self.request.get('lat')
+        lng = self.request.get('lng')
+        name = self.request.get('name')
+        # name = json.loads(name)
+        phone = self.request.get('phone')
+        misc = self.request.get('misc')
+
+        if lat and lng and name and phone and misc:
+            l = LostPet(lat = lat, lng = lng, name = name, phone = phone, misc = misc)
+            l.put()
+            logging.info('entered lost pet')
+            # lat = str(location['lat'])
+            # lng = str(location['lng'])
+            # k = LostPet.query().get()
+            # Let's first check if this user already exists in the database
+            # If they do, get that entry (its key) and modify it
+            # if k:
+            #     instance = k
+            #     instance.lat = lat
+            #     instance.lng = lng
+            # else:
+                # instance = LostPet(name=user.nickname(), lat=lat, lng=lng)
+            # instance.put()
+
+    def get(self):
+        """GET request returns all location entries in the database."""
+        q = LostPet.query()
+        p = q.fetch()
+        # Turn the list from a list of Birthplace objects into list of dicts
+        result = [i.to_dict() for i in p]
+        self.response.out.write(json.dumps(result))
 
 
-# class SpotLocationHandler(webapp2.RequestHandler):
-#     #saves spotted locations entered by users
-#     def post(self):
-#
-#     #returns all spotted locations entered into database
-#     def get(self):
 
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
+    ('/lost', LostPetHandler),
 
-    # ('/lost', LostMapPage)
-    # ('/postlost', LostLocationHandler),
-    # ('/getlost', LostLocationHandler),
-    # ('/postspot', SpotLocationHandler),
-    # ('/getspot', SpotLocationHandler),
+
 ], debug=True)
