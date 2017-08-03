@@ -29,6 +29,7 @@ class LostPet(ndb.Model):
     lat = ndb.StringProperty()
     lng = ndb.StringProperty()
     name = ndb.StringProperty()
+    pet = ndb.StringProperty()
     phone = ndb.StringProperty()
     misc = ndb.StringProperty()
 
@@ -49,27 +50,11 @@ class MainHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template('templates/map.html')
         self.response.write(template.render())
 
-        my_vars = {
-
-        "ownername" : self.request.get("ownername"),
-        "ownernum" : self.request.get("ownername"),
-        # "lostpet" : self.request.get("lostpet"),
-        # "breed" : self.request.get("breed"),
-        # "height" : self.request.get("height"),
-        # "weight" : self.request.get("weight"),
-        "misc" : self.request.get("misc")
-
-        }
-        template = jinja_environment.get_template('templates/index.html')
-        output = self.response.write(template.render())
-
-    def post(self):
-        pass
-
         # my_vars = {
         #
         # "ownername" : self.request.get("ownername"),
         # "ownernum" : self.request.get("ownername"),
+        # "petname" : self.request.get("petname"),
         # "lostpet" : self.request.get("lostpet"),
         # "breed" : self.request.get("breed"),
         # "height" : self.request.get("height"),
@@ -77,55 +62,8 @@ class MainHandler(webapp2.RequestHandler):
         # "misc" : self.request.get("misc")
         #
         # }
-        # template = jinja_environment.get_template('templates/map.html')
-        # self.response.write(template.render(my_vars))
-
-class AllDogsHandler(webapp2.RequestHandler):
-    def get(self):
-
-        # template = jinja_environment.get_template('templates/form3.html')
-        # self.response.write(template.render())
-
-        template = jinja_environment.get_template('templates/alldogsmap.html')
-        self.response.write(template.render())
-
-        my_vars = {
-
-        "ownername" : self.request.get("ownername"),
-        "ownernum" : self.request.get("ownername"),
-        # "lostpet" : self.request.get("lostpet"),
-        # "breed" : self.request.get("breed"),
-        # "height" : self.request.get("height"),
-        # "weight" : self.request.get("weight"),
-        "misc" : self.request.get("misc")
-
-        }
         template = jinja_environment.get_template('templates/index.html')
         output = self.response.write(template.render())
-
-    def post(self):
-        pass
-
-        # my_vars = {
-        #
-        # "ownername" : self.request.get("ownername"),
-        # "ownernum" : self.request.get("ownername"),
-        # "lostpet" : self.request.get("lostpet"),
-        # "breed" : self.request.get("breed"),
-        # "height" : self.request.get("height"),
-        # "weight" : self.request.get("weight"),
-        # "misc" : self.request.get("misc")
-        #
-        # }
-        # template = jinja_environment.get_template('templates/map.html')
-        # self.response.write(template.render(my_vars))
-
-
-# class LostMapPage(webapp2.RequestHandler):
-#     def get(self):
-#         template = jinja_environment.get_template('templates/map.html')
-#         self.response.write(template.render())
-
 
 class LostPetHandler(webapp2.RequestHandler):
     def post(self):
@@ -141,12 +79,13 @@ class LostPetHandler(webapp2.RequestHandler):
         lat = self.request.get('lat')
         lng = self.request.get('lng')
         name = self.request.get('name')
+        pet = self.request.get('pet')
         # name = json.loads(name)
         phone = self.request.get('phone')
         misc = self.request.get('misc')
 
-        if lat and lng and name and phone and misc:
-            l = LostPet(lat = lat, lng = lng, name = name, phone = phone, misc = misc)
+        if lat and lng and name and pet and phone and misc:
+            l = LostPet(lat = lat, lng = lng, name = name, pet = pet, phone = phone, misc = misc)
             l.put()
             logging.info('entered lost pet')
             # lat = str(location['lat'])
@@ -163,35 +102,19 @@ class LostPetHandler(webapp2.RequestHandler):
             # instance.put()
 
     def get(self):
-
-        template = jinja_environment.get_template('templates/alldogsmap.html')
-        self.response.write(template.render())
-
-
-        """GET request returns all location entries in the database."""
-        # q = LostPet.query()
-        # p = q.fetch()
-        # # Turn the list from a list of Birthplace objects into list of dicts
-        # result = [i.to_dict() for i in p]
-        # self.response.write(json.dumps(result))
-
-class GetLostPetHandler(webapp2.RequestHandler):
-    def get(self):
         q = LostPet.query()
         p = q.fetch()
         # Turn the list from a list of Birthplace objects into list of dicts
         result = [i.to_dict() for i in p]
         self.response.write(json.dumps(result))
 
-
-
+class GetLostPetHandler(webapp2.RequestHandler):
+    def get(self):
+        template = jinja_environment.get_template('templates/alldogsmap.html')
+        self.response.write(template.render())
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/lost', LostPetHandler),
     ('/getlost', GetLostPetHandler),
-    ('/all', AllDogsHandler)
-
-
-
 ], debug=True)
