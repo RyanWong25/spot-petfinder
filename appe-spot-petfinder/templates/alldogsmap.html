@@ -22,15 +22,12 @@
     </style>
   </head>
   <body>
-    <h1>Spot It</h1>
-
-
-
-    <a href="/mapr-all">See all lost dogs</a>
+    <h1>Spot: Pet Finder</h1>
+    <a href="/">Mark a lost pet</a>
       <br>
       <div id="map"></div>
       <br>
-      <button class="btn btn-primary" onclick="sendPosition()">Mark Your Dog</button>
+      <!-- <button class="btn btn-primary" onclick="sendPosition()">Mark Your Dog</button> -->
       <div id="successModal" class="modal fade bs-example-modal-sm">
         <div class="modal-dialog modal-sm">
           <div class="modal-content">
@@ -64,7 +61,7 @@
 
         });
 
-        getLoc();
+        getLocation();
       // map.addListener('click', function(e) {
       //   placeMarkerAndPanTo(e.latLng, map);
       //   s = (e.latLng);
@@ -103,33 +100,37 @@
 
     }
 
-    function getLoc() {
+    function getLocation() {
       $.ajax({
         type: 'GET',
-        url: '/getlost',
+        url: '/lost',
         success: function(result) {
           result = JSON.parse(result);
-          console.log('hi');
+
           console.log(result);
           result.forEach(r => {
-            r = {'lat' : parseFloat(r.lat), 'lng' : parseFloat(r.lng)};
-            new google.maps.Marker({map: map, position: r});
+            r = {'name' : r.name, 'phone' : r.phone, 'pet' : r.pet, 'misc' : r.misc, 'lat' : parseFloat(r.lat), 'lng' : parseFloat(r.lng)};
+            m = new google.maps.Marker({map: map, position: r, icon: '/dogpic/dog.png'});
+            info = 'name: ' + r.name + '<br>phone number: ' + r.phone + '<br>pet\'s name: ' + r.pet + '<br>details: ' + r.misc;
+            addInfoWindow(m, info);
           });
-          var marker = new google.maps.Marker({
-                    position: {lat : -25.363, lng: 131.044},
-                    map: map,
-                    title: 'Hello World!'
-                  });
         }
       })
 
-      marker = new google.maps.Marker({
-        map: map,
-      });
+      // marker = new google.maps.Marker({
+      //   map: map,
+      // });
 
     }
 
-
+    function addInfoWindow(marker, info) {
+      var infoWindow = new google.maps.InfoWindow({
+        content: info
+      });
+      google.maps.event.addListener(marker, 'click', function () {
+        infoWindow.open(map, marker);
+      });
+    }
 
     // function storeLostPet(latLng){
     //   console.log('hello');
@@ -155,10 +156,5 @@
 
     </body>
 </html>
-
-
-
-
   }
-
-  }
+}
