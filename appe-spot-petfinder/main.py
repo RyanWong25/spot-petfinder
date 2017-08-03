@@ -47,7 +47,7 @@ class MainHandler(webapp2.RequestHandler):
         # template = jinja_environment.get_template('templates/form3.html')
         # self.response.write(template.render())
 
-        template = jinja_environment.get_template('templates/map.html')
+        template = jinja_environment.get_template('templates/index.html')
         self.response.write(template.render())
 
         # my_vars = {
@@ -62,8 +62,6 @@ class MainHandler(webapp2.RequestHandler):
         # "misc" : self.request.get("misc")
         #
         # }
-        template = jinja_environment.get_template('templates/index.html')
-        output = self.response.write(template.render())
 
 class LostPetHandler(webapp2.RequestHandler):
     def post(self):
@@ -113,8 +111,14 @@ class GetLostPetHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template('templates/alldogsmap.html')
         self.response.write(template.render())
 
+class MarkLostPetHandler(webapp2.RequestHandler):
+    def get(self):
+        template = jinja_environment.get_template('templates/map.html')
+        self.response.write(template.render())
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/lost', LostPetHandler),
     ('/getlost', GetLostPetHandler),
+    ('/marklost', MarkLostPetHandler),
 ], debug=True)

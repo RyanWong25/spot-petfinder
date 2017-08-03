@@ -1,10 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="icon" href="http://cdn.damianpuppies.com/2017/03/22/dalmatian-puppy-clip-art-related-keywords-suggestions-dalmatian.png">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <title>Simple Map</title>
+    <title>SPOT: Pet Finder</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/skel.min.js"></script>
+    <script src="js/skel-layers.min.js"></script>
+    <script src="js/init.js"></script>
+    <noscript>
+      <link rel="stylesheet" href="css/skel.css" />
+      <link rel="stylesheet" href="css/style.css" />
+      <link rel="stylesheet" href="css/style-xlarge.css" />
+    </noscript>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <style>
       /* Always set the map height explicitly to define the size of the div
@@ -22,9 +36,19 @@
     </style>
   </head>
   <body>
-    <h1>Spot: Pet Finder</h1>
-    <a href="/">Mark a lost pet</a>
-      <br>
+
+    <header id="header">
+      <h1><a href="/">SPOT</a></h1>
+      <nav id="nav">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/marklost">Mark Lost Pet</a></li>
+          <li><a href="/getlost">See All Lost Pets</a></li>
+          <!-- <li><a href="#" class="button special">Sign Up</a></li> -->
+        </ul>
+      </nav>
+    </header>
+
       <div id="map"></div>
       <br>
       <!-- <button class="btn btn-primary" onclick="sendPosition()">Mark Your Dog</button> -->
@@ -44,7 +68,7 @@
       right: 0px;
     }
     #map {
-      height: calc(100% - 200px);
+      height: 700px;
       width: 100%;
     }
     </style>
@@ -110,7 +134,7 @@
           console.log(result);
           result.forEach(r => {
             r = {'name' : r.name, 'phone' : r.phone, 'pet' : r.pet, 'misc' : r.misc, 'lat' : parseFloat(r.lat), 'lng' : parseFloat(r.lng)};
-            m = new google.maps.Marker({map: map, position: r, icon: '/dogpic/dog.png'});
+            m = new google.maps.Marker({map: map, position: r, icon: '/res/dog.png'});
             info = 'name: ' + r.name + '<br>phone number: ' + r.phone + '<br>pet\'s name: ' + r.pet + '<br>details: ' + r.misc;
             addInfoWindow(m, info);
           });

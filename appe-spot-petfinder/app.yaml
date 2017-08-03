@@ -5,8 +5,17 @@ api_version: 1
 threadsafe: yes
 
 handlers:
-- url: /dogpic
+- url: /res
   static_dir: images
+
+- url: /js
+  static_dir: js
+
+- url: /css
+  static_dir: css
+
+- url: /fonts
+  static_dir: fonts
 
 - url: .*
   script: main.app

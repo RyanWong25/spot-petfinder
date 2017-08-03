@@ -1,10 +1,24 @@
 <!DOCTYPE html>
   <html>
     <head>
+      <link rel="icon" href="http://cdn.damianpuppies.com/2017/03/22/dalmatian-puppy-clip-art-related-keywords-suggestions-dalmatian.png">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-      <title>Simple Map</title>
+      <title>SPOT: Pet Finder</title>
       <meta name="viewport" content="initial-scale=1.0">
       <meta charset="utf-8">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  		<meta name="description" content="" />
+  		<meta name="keywords" content="" />
+  		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+  		<script src="js/jquery.min.js"></script>
+  		<script src="js/skel.min.js"></script>
+  		<script src="js/skel-layers.min.js"></script>
+  		<script src="js/init.js"></script>
+  		<noscript>
+  			<link rel="stylesheet" href="css/skel.css" />
+  			<link rel="stylesheet" href="css/style.css" />
+  			<link rel="stylesheet" href="css/style-xlarge.css" />
+  		</noscript>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <style>
         /* Always set the map height explicitly to define the size of the div
@@ -22,33 +36,46 @@
       </style>
     </head>
     <body>
-      <h1>Spot: Pet Finder</h1>
-      </br>
-      <h4>Lost Pet Identification Form</h4>
-          <label for = "ownername" >Your name:</label>
-          <input id="ownername" type = "text" name = "ownername"/>
-        </br>
-          <label for = "ownernum" >Your cellphone number:</label>
-          <input id="ownernum" type = "text" name = "ownernum"/>
-        </br>
-          <label for = "petname" >Your pet's name:</label>
-          <input id="petname" type = "text" name = "petname"/>
-        </br>
-          <label>Enter any additional information about your pet that may help identify it:</label>
-          <input id="misc" type="text" name="misc"/>
-        </br>
 
+        <header id="header">
+          <h1><a href="/">SPOT</a></h1>
+          <nav id="nav">
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/marklost">Mark Lost Pet</a></li>
+              <li><a href="/getlost">See All Lost Pets</a></li>
+              <!-- <li><a href="#" class="button special">Sign Up</a></li> -->
+            </ul>
+          </nav>
+        </header>
+
+      <!-- <h1>Spot: Pet Finder</h1> -->
+      <section id="main" class="wrapper">
+				<div class="container">
+
+					<header class="major">
+						<h2>Lost Pet Identification Form</h2>
+            <label for = "ownername" ><p>Your name:</p></label>
+            <input id="ownername" type = "text" name = "ownername"/>
+          </br>
+            <label for = "ownernum" ><p>Your cellphone number:</p></label>
+            <input id="ownernum" type = "text" name = "ownernum"/>
+          </br>
+            <label for = "petname" ><p>Your pet's name:</p></label>
+            <input id="petname" type = "text" name = "petname"/>
+          </br>
+            <label><p>Enter any additional information about your pet that may help identify it:</p></label>
+            <input id="misc" type="text" name="misc"/>
+            </header>
+    				</div>
+    			</section>
          <!-- <p><input type="submit" value="Submit" onclick="storeLostPet()"></p> -->
-    </br>
-      <a href="/getlost" class="button">See all lost pets</a>
-      </br>
         <div id="map"></div>
       </br>
         <!-- <button class="btn btn-primary" onclick="sendPosition()">Mark Your Dog</button> -->
         <div id="successModal" class="modal fade bs-example-modal-sm">
           <div class="modal-dialog modal-sm">
             <div class="modal-content">
-      <div id="map"></div>
       <style>
       body {
         margin: 0px;
@@ -61,8 +88,9 @@
         right: 0px;
       }
       #map {
-        height: calc(100% - 200px);
+        height: 700px;
         width: 100%;
+
       }
       </style>
 
@@ -84,7 +112,7 @@
           });
         }
         function placeMarkerAndPanTo(latLng, map) {
-          var image = '/dogpic/dog.png';
+          var image = '/res/dog.png';
           var marker = new google.maps.Marker({
           position: latLng,
           icon: image,
@@ -131,7 +159,6 @@
       </script>
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXT58ti2WBlhiJvhE_ckqkaJCyh7eg6bQ&callback=initMap"
         async defer></script>
-
       </body>
   </html>
     }
